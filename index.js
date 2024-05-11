@@ -1,6 +1,7 @@
 const cheerio = require("cheerio");
 const axios = require("axios");
 const fs = require("fs");
+const xlsx = require("xlsx");
 
 const productDetailsArray = [];
 
@@ -34,3 +35,9 @@ const products = $(".jss18").find(".products").each((index,elem)=>{
     productDetailsArray.push(productDetails);
 });
 console.log(productDetailsArray)
+
+const workBook = xlsx.utils.book_new();
+const workSheet = xlsx.utils.json_to_sheet(productDetailsArray);
+
+xlsx.utils.book_append_sheet(workBook,workSheet,"sheet1");
+xlsx.writeFile(workBook,"product.xlsx");
