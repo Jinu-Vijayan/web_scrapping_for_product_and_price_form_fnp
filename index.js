@@ -26,10 +26,12 @@ const $ = cheerio.load(htmlDataFromSite);
 const products = $(".jss18").find(".products").each((index,elem)=>{
     const productName = $(elem).find(".product-card_product-title__32LFp").text();
     const productPrice = $(elem).find(".product-card_product-desc-tile__10UVW").find(".product-card_product-price-info-container__E9rQf").find(".product-card_product-price-info__17tj7").text();
+    const productRating = $(elem).find(".product-card_rating-sec__34VZH").text();
 
     const productDetails = {
         productName : productName,
-        productPrice : productPrice
+        productPrice : productPrice,
+        productRating : productRating.slice(0,3)
     }
 
     productDetailsArray.push(productDetails);
